@@ -6,20 +6,20 @@
 #    By: nshahid <nshahid@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/27 11:03:30 by nshahid           #+#    #+#              #
-#    Updated: 2023/07/04 05:05:53 by nshahid          ###   ########.fr        #
+#    Updated: 2023/07/04 06:24:36 by nshahid          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCP		= ./
 SRCP_B		= ./
-SRCS		= $(filter-out $(wildcard $(SRCP)ft_lst.c), $(wildcard $(SRCP).c))
+SRCS		= $(filter-out $(wildcard $(SRCP)ft_lst.c), $(wildcard $(SRCP)*.c))
 SRCS_B		= $(filter $(wildcard $(SRCP_B)ft_lst.c), $(wildcard $(SRCP_B)*.c))
 SRC			= $(addprefix $(SRCP), $(notdir $(SRCS)))
 SRC_B		= $(addprefix $(SRCP_B), $(notdir $(SRCS_B)))
 OBJS		= $(SRC:.c=.o)
 OBJS_B		= $(SRC_B:.c=.o)
 
-HEAD	= ./includes/
+HEAD	= ./
 NAME	= libft.a
 AR		= ar rcs
 RM		= rm -f
@@ -37,28 +37,28 @@ BLUE	= \033[34m
 all: ${NAME}
 
 $(OBJS): %.o: %.c
-	@if ! $(GCC) $(CFLAGS) -c -I $(HEAD) $< -o $@ 2> error.txt; then
-		echo "$(RED)$(BOLD)MAKEFILE TERMINATED!$(RESET)";
-		echo "$(YELLOW)Unable to create the object file for $<$(RESET)";
-		echo "\n\n$(RED)$(BOLD)ERROR$(RESET)";
-		sed '$$d' error.txt;
-		echo "\n\n$(YELLOW)EXITING$(RESET)";
-		exit 1;
+	@if ! $(GCC) $(CFLAGS) -c -I $(HEAD) $< -o $@ 2> error.txt; then \
+		echo "$(RED)$(BOLD)MAKEFILE TERMINATED!$(RESET)"; \
+		echo "$(YELLOW)Unable to create the object file for $<$(RESET)"; \
+		echo "\n\n$(RED)$(BOLD)ERROR$(RESET)"; \
+		sed '$$d' error.txt; \
+		echo "\n\n$(YELLOW)EXITING$(RESET)"; \
+		exit 1; \
 	fi
 
 $(OBJS_B): %.o: %.c
-	@if ! $(GCC) $(CFLAGS) -c -I $(HEAD) $< -o $@ 2> error.txt; then
-		echo "$(RED)$(BOLD)MAKEFILE TERMINATED!$(RESET)";
-		echo "$(YELLOW)Unable to create the object file for $<$(RESET)";
-		echo "\n\n$(RED)$(BOLD)ERROR$(RESET)";
-		sed '$$d' error.txt;
-		echo "\n\n$(YELLOW)EXITING$(RESET)";
-		exit 1;
+	@if ! $(GCC) $(CFLAGS) -c -I $(HEAD) $< -o $@ 2> error.txt; then \
+		echo "$(RED)$(BOLD)MAKEFILE TERMINATED!$(RESET)"; \
+		echo "$(YELLOW)Unable to create the object file for $<$(RESET)"; \
+		echo "\n\n$(RED)$(BOLD)ERROR$(RESET)"; \
+		sed '$$d' error.txt; \
+		echo "\n\n$(YELLOW)EXITING$(RESET)"; \
+		exit 1; \
 	fi
 
 ${NAME}: $(OBJS)
-	@$(AR) ${NAME} $(OBJS)
-	@$(LIB) ${NAME}
+	@$(AR) $(NAME) $(OBJS)
+	@$(LIB) $(NAME)
 	@echo "$(GREEN)$(BOLD)SUCCESS$(RESET)"
 	@echo "$(YELLOW)Created: $(words $(OBJS)) object file(s)$(RESET)"
 	@echo "$(YELLOW)Created: ${NAME}$(RESET)"
@@ -68,8 +68,8 @@ so: ${OBJS}
 	@echo "$(YELLOW)Created: libft.so$(RESET)"
 
 bonus: $(OBJS) $(OBJS_B)
-	@$(AR) ${NAME} $(OBJS) $(OBJS_B)
-	@$(LIB) ${NAME}
+	@$(AR) $(NAME) $(OBJS) $(OBJS_B)
+	@$(LIB) $(NAME)
 	@echo "$(GREEN)$(BOLD)SUCCESS$(RESET)"
 	@echo "$(YELLOW)Created: $(words $(OBJS) $(OBJS_B)) object file(s)$(RESET)"
 	@echo "$(YELLOW)Created: ${NAME}$(RESET)"
