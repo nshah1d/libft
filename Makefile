@@ -6,37 +6,66 @@
 #    By: nshahid <nshahid@student.42abudhabi.ae>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/27 11:03:30 by nshahid           #+#    #+#              #
-#    Updated: 2023/07/04 06:24:36 by nshahid          ###   ########.fr        #
+#    Updated: 2023/06/27 21:44:45 by nshahid          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCP		= ./
-SRCP_B		= ./
-SRCS		= $(filter-out $(wildcard $(SRCP)ft_lst.c), $(wildcard $(SRCP)*.c))
-SRCS_B		= $(filter $(wildcard $(SRCP_B)ft_lst.c), $(wildcard $(SRCP_B)*.c))
-SRC			= $(addprefix $(SRCP), $(notdir $(SRCS)))
-SRC_B		= $(addprefix $(SRCP_B), $(notdir $(SRCS_B)))
-OBJS		= $(SRC:.c=.o)
-OBJS_B		= $(SRC_B:.c=.o)
+# **************************************************************************** #
+#                                DIRECTORIES                                   #
+# **************************************************************************** #
 
-HEAD	= ./
-NAME	= libft.a
-AR		= ar rcs
-RM		= rm -f
-LIB		= ranlib
-GCC		= gcc
-CFLAGS	= -Wall -Wextra -Werror
+SRCP			= ./srcs/
+SRCP_CHECK		= $(SRCP)check/
+SRCP_LIST 		= $(SRCP)list/
+SRCP_MEMORY		= $(SRCP)memory/
+SRCP_PRINT		= $(SRCP)print/
+SRCP_STRING		= $(SRCP)string/
 
-RESET	= \033[0m
-BOLD	= \033[1m
-RED		= \033[31m
-GREEN	= \033[32m
-YELLOW	= \033[33m
-BLUE	= \033[34m
+SRCS_CHECK		= $(notdir $(wildcard $(SRCP_CHECK)*.c))
+SRCS_LIST		= $(notdir $(wildcard $(SRCP_LIST)*.c))
+SRCS_MEMORY		= $(notdir $(wildcard $(SRCP_MEMORY)*.c))
+SRCS_PRINT		= $(notdir $(wildcard $(SRCP_PRINT)*.c))
+SRCS_STRING		= $(notdir $(wildcard $(SRCP_STRING)*.c))
 
-all: ${NAME}
+SRC_CHECK		= $(addprefix $(SRCP_CHECK),$(SRCS_CHECK))
+SRC_LIST		= $(addprefix $(SRCP_LIST),$(SRCS_LIST))
+SRC_MEMORY		= $(addprefix $(SRCP_MEMORY),$(SRCS_MEMORY))
+SRC_PRINT		= $(addprefix $(SRCP_PRINT),$(SRCS_PRINT))
+SRC_STRING		= $(addprefix $(SRCP_STRING),$(SRCS_STRING))
 
-$(OBJS): %.o: %.c
+OBJS_CHECK		= $(SRC_CHECK:.c=.o)
+OBJS_LIST		= $(SRC_LIST:.c=.o)
+OBJS_MEMORY		= $(SRC_MEMORY:.c=.o)
+OBJS_PRINT		= $(SRC_PRINT:.c=.o)
+OBJS_STRING		= $(SRC_STRING:.c=.o)
+
+HEAD			= ./includes/
+
+# **************************************************************************** #
+#                                  VARIABLES                                   #
+# **************************************************************************** #
+
+NAME		= libft.a
+AR			= ar rcs
+RM			= rm -f
+LIB			= ranlib
+GCC			= gcc
+CFLAGS 		= -Wall -Wextra -Werror
+
+RESET		= \033[0m
+BOLD		= \033[1m
+RED			= \033[31m
+GREEN		= \033[32m
+YELLOW		= \033[33m
+BLUE		= \033[34m
+
+# **************************************************************************** #
+#                                   TARGETS                                    #
+# **************************************************************************** #
+
+all: $(NAME)
+
+$(OBJS_CHECK): %.o: %.c
 	@if ! $(GCC) $(CFLAGS) -c -I $(HEAD) $< -o $@ 2> error.txt; then \
 		echo "$(RED)$(BOLD)MAKEFILE TERMINATED!$(RESET)"; \
 		echo "$(YELLOW)Unable to create the object file for $<$(RESET)"; \
@@ -46,7 +75,7 @@ $(OBJS): %.o: %.c
 		exit 1; \
 	fi
 
-$(OBJS_B): %.o: %.c
+$(OBJS_LIST): %.o: %.c
 	@if ! $(GCC) $(CFLAGS) -c -I $(HEAD) $< -o $@ 2> error.txt; then \
 		echo "$(RED)$(BOLD)MAKEFILE TERMINATED!$(RESET)"; \
 		echo "$(YELLOW)Unable to create the object file for $<$(RESET)"; \
@@ -56,33 +85,63 @@ $(OBJS_B): %.o: %.c
 		exit 1; \
 	fi
 
-${NAME}: $(OBJS)
-	@$(AR) $(NAME) $(OBJS)
+$(OBJS_MEMORY): %.o: %.c
+	@if ! $(GCC) $(CFLAGS) -c -I $(HEAD) $< -o $@ 2> error.txt; then \
+		echo "$(RED)$(BOLD)MAKEFILE TERMINATED!$(RESET)"; \
+		echo "$(YELLOW)Unable to create the object file for $<$(RESET)"; \
+		echo "\n\n$(RED)$(BOLD)ERROR$(RESET)"; \
+		sed '$$d' error.txt; \
+		echo "\n\n$(YELLOW)EXITING$(RESET)"; \
+		exit 1; \
+	fi
+
+$(OBJS_PRINT): %.o: %.c
+	@if ! $(GCC) $(CFLAGS) -c -I $(HEAD) $< -o $@ 2> error.txt; then \
+		echo "$(RED)$(BOLD)MAKEFILE TERMINATED!$(RESET)"; \
+		echo "$(YELLOW)Unable to create the object file for $<$(RESET)"; \
+		echo "\n\n$(RED)$(BOLD)ERROR$(RESET)"; \
+		sed '$$d' error.txt; \
+		echo "\n\n$(YELLOW)EXITING$(RESET)"; \
+		exit 1; \
+	fi
+
+$(OBJS_STRING): %.o: %.c
+	@if ! $(GCC) $(CFLAGS) -c -I $(HEAD) $< -o $@ 2> error.txt; then \
+		echo "$(RED)$(BOLD)MAKEFILE TERMINATED!$(RESET)"; \
+		echo "$(YELLOW)Unable to create the object file for $<$(RESET)"; \
+		echo "\n\n$(RED)$(BOLD)ERROR$(RESET)"; \
+		sed '$$d' error.txt; \
+		echo "\n\n$(YELLOW)EXITING$(RESET)"; \
+		exit 1; \
+	fi
+
+$(NAME): $(OBJS_CHECK) $(OBJS_MEMORY) $(OBJS_PRINT) $(OBJS_STRING)
+	@$(AR) $(NAME) $(OBJS_CHECK) $(OBJS_MEMORY) $(OBJS_PRINT) $(OBJS_STRING)
 	@$(LIB) $(NAME)
 	@echo "$(GREEN)$(BOLD)SUCCESS$(RESET)"
-	@echo "$(YELLOW)Created: $(words $(OBJS)) object file(s)$(RESET)"
-	@echo "$(YELLOW)Created: ${NAME}$(RESET)"
+	@echo "$(YELLOW)Created: $(words $(OBJS_CHECK) $(OBJS_MEMORY) $(OBJS_PRINT) $(OBJS_STRING)) object file(s)$(RESET)"
+	@echo "$(YELLOW)Created: $(NAME)$(RESET)"
 
-so: ${OBJS}
-	@${GCC} -shared -o libft.so ${OBJS}
+bonus: $(OBJS_CHECK) $(OBJS_LIST) $(OBJS_MEMORY) $(OBJS_PRINT) $(OBJS_STRING)
+	@$(AR) $(NAME) $(OBJS_CHECK) $(OBJS_LIST) $(OBJS_MEMORY) $(OBJS_PRINT) $(OBJS_STRING)
+	@$(LIB) $(NAME)
+	@echo "$(GREEN)$(BOLD)SUCCESS$(RESET)"
+	@echo "$(YELLOW)Created: $(words $(OBJS_CHECK) $(OBJS_LIST) $(OBJS_MEMORY) $(OBJS_PRINT) $(OBJS_STRING)) object file(s)$(RESET)"
+	@echo "$(YELLOW)Created: $(NAME)$(RESET)"
+
+so: $(OBJS_CHECK) $(OBJS_MEMORY) $(OBJS_PRINT) $(OBJS_STRING)
+	@${GCC} -shared -o libft.so $(OBJS_CHECK) $(OBJS_MEMORY) $(OBJS_PRINT) $(OBJS_STRING)
 	@echo "$(YELLOW)Created: libft.so$(RESET)"
 
-bonus: $(OBJS) $(OBJS_B)
-	@$(AR) $(NAME) $(OBJS) $(OBJS_B)
-	@$(LIB) $(NAME)
-	@echo "$(GREEN)$(BOLD)SUCCESS$(RESET)"
-	@echo "$(YELLOW)Created: $(words $(OBJS) $(OBJS_B)) object file(s)$(RESET)"
-	@echo "$(YELLOW)Created: ${NAME}$(RESET)"
-
 clean:
-	@$(RM) $(OBJS) $(OBJS_B) error.txt
+	@$(RM) $(OBJS_CHECK) $(OBJS_LIST) $(OBJS_MEMORY) $(OBJS_PRINT) $(OBJS_STRING) error.txt
 	@echo "$(GREEN)$(BOLD)SUCCESS$(RESET)"
-	@echo "$(YELLOW)Removed: $(words $(OBJS) $(OBJS_B)) object file(s)$(RESET)"
+	@echo "$(YELLOW)Removed: $(words $(OBJS_CHECK) $(OBJS_LIST) $(OBJS_MEMORY) $(OBJS_PRINT) $(OBJS_STRING)) object file(s)$(RESET)"
 
 fclean: clean
 	@$(RM) $(NAME) libft.so
-	@echo "$(YELLOW)Removed: ${NAME}$(RESET)"
+	@echo "$(YELLOW)Removed: $(NAME)$(RESET)"
 
 re: fclean all
 
-.PHONY: all clean fclean re so bonus
+.PHONY: all clean fclean re bonus
