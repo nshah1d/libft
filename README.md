@@ -1,4 +1,4 @@
-# 42 ABU DHABI
+# 42 ABU DHABI: LIBFT
 [Personal website which contains my current and past projects being undertaken at 42 Abu Dhabi.](https://42.nauman.cc/)<br />
 Get ready for some coding fun with Libft! It’s the first project you’ll tackle at 42, and it’s all about creating a supercharged library of awesome functions in good ol’ C. We’re talking about functions that give the standard ones a run for their money!<br/>
 <br/>
