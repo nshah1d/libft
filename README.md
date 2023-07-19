@@ -23,15 +23,17 @@ It’s a challenge, but it’s also an opportunity to show off your coding skill
 | Function      | Description  |
 | :--------------:| :----------:|
 | [ft_memset](./srcs/memory/ft_memset.c) | Sets each byte of the memory block pointed to by str to the value c, up to a specified length n. It returns the pointer str after modifying the memory block.|
-| ft_bzero |  Sets the first n bytes of the memory pointed to by s to zero. It iterates through the memory block by decrementing n, and for each iteration, it assigns the value 0 to the current byte pointed to by s.|
-| ft_memcpy | Copies n bytes from the memory area pointed to by src to the memory area pointed to by dest. It returns a pointer to the destination memory area.|
-| ft_memmove | Copies n bytes from the memory area pointed to by src to the memory area pointed to by dest. It handles overlapping memory regions correctly by using a temporary buffer. It returns a pointer to the destination memory area.|
-| ft_memchr | Searches for the first occurrence of the character c in the memory block pointed to by str, up to a specified length n. It iterates through the memory block using a while loop and checks if each byte matches c. If a match is found, it returns a pointer to that byte. If no match is found within the specified length, it returns NULL.|
-| ft_memcmp |  Compares the memory blocks pointed to by s1 and s2 up to a specified length n. It iterates through the memory blocks using a while loop, comparing each byte. If a byte in s1 is not equal to the corresponding byte in s2, it returns the difference between the two bytes. If all bytes are equal within the specified length, it returns 0 to indicate that the memory blocks are equal.|
-| ft_calloc |  Allocates memory for an array of elements with a specified count and n size. It checks for overflow, allocates memory using malloc, and zeroes out the memory before returning the pointer to the allocated memory.|
-| ft_strlen | Calculates the length of a null-terminated string. It takes a pointer to a constant character array (str) as input. It initializes a variable i as 0 and then iterates through the characters of the string until it encounters the null terminator (‘\0’). For each character, it increments i. Finally, it returns the value of i, representing the length of the string.|
-| ft_strdup | Duplicates a string src by allocating memory for a new string, copying the contents of src into it, and returning the pointer to the new string.|
+| [ft_bzero](./srcs/memory/ft_bzero.c) |  Sets the first n bytes of the memory pointed to by s to zero. It iterates through the memory block by decrementing n, and for each iteration, it assigns the value 0 to the current byte pointed to by s.|
+| [ft_memcpy](./srcs/memory/ft_memcpy.c) | Copies n bytes from the memory area pointed to by src to the memory area pointed to by dest. It returns a pointer to the destination memory area.|
+| [ft_memmove](./srcs/memory/ft_memmove.c) | Copies n bytes from the memory area pointed to by src to the memory area pointed to by dest. It handles overlapping memory regions correctly by using a temporary buffer. It returns a pointer to the destination memory area.|
+| [ft_memchr](./srcs/memory/ft_memchr.c) | Searches for the first occurrence of the character c in the memory block pointed to by str, up to a specified length n. It iterates through the memory block using a while loop and checks if each byte matches c. If a match is found, it returns a pointer to that byte. If no match is found within the specified length, it returns NULL.|
+| [ft_memcmp](./srcs/memory/ft_memcmp.c) |  Compares the memory blocks pointed to by s1 and s2 up to a specified length n. It iterates through the memory blocks using a while loop, comparing each byte. If a byte in s1 is not equal to the corresponding byte in s2, it returns the difference between the two bytes. If all bytes are equal within the specified length, it returns 0 to indicate that the memory blocks are equal.|
+| [ft_calloc](./srcs/memory/ft_calloc.c) |  Allocates memory for an array of elements with a specified count and n size. It checks for overflow, allocates memory using malloc, and zeroes out the memory before returning the pointer to the allocated memory.|
+| [ft_strlen](./srcs/string/ft_strlen.c) | Calculates the length of a null-terminated string. It takes a pointer to a constant character array (str) as input. It initializes a variable i as 0 and then iterates through the characters of the string until it encounters the null terminator (‘\0’). For each character, it increments i. Finally, it returns the value of i, representing the length of the string.|
+| [ft_strdup](./srcs/string/ft_strdup.c) | Duplicates a string src by allocating memory for a new string, copying the contents of src into it, and returning the pointer to the new string.|
 
 
 `60% OF THE TIME WORKS EVERY TIME`
 
+
+WORK IN PROGRESS
