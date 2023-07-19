@@ -19,7 +19,6 @@ But wait, there’s a catch! Your revamped functions should have the exact same 
 <br/>
 It’s a challenge, but it’s also an opportunity to show off your coding skills and attention to detail. So, roll up your sleeves, put on your coding cap, and let’s give these libc functions a hip new vibe with the power of “ft_”!<br/>
 <br/>
-# Table of Content
 | Function      | Description  |
 | :--------------:| :----------:|
 | [ft_memset](./srcs/memory/ft_memset.c) | Sets each byte of the memory block pointed to by str to the value c, up to a specified length n. It returns the pointer str after modifying the memory block.|
