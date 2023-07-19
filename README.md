@@ -10,7 +10,9 @@ Now, let’s dive into the fun structure of this project. We’ve got three thri
 <br/>
 So buckle up and embark on this thrilling coding adventure with Libft. It’s time to unleash your programming powers and create something truly epic!<br/>
 <br/>
+<br/>
 `WORKS ON MY MACHINE`<br/>
+<br/>
 
 # Part I
 Alright, let’s kick off this project with a blast! In this first phase, your mission is to revamp a bunch of libc functions, just like the ones you find in their manual pages. But here’s the twist: you need to give them a funky makeover by adding “ft_” as a prefix to their names. So, for example, strlen becomes ft_strlen. Cool, right?<br/>
