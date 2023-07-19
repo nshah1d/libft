@@ -22,7 +22,7 @@ It’s a challenge, but it’s also an opportunity to show off your coding skill
 # Table of Content
 | Function      | Description  |
 | :--------------:| :----------:|
-| ft_memset (./srcs/memory/ft_memset.c) | Sets each byte of the memory block pointed to by str to the value c, up to a specified length n. It returns the pointer str after modifying the memory block.|
+| [ft_memset](./srcs/memory/ft_memset.c) | Sets each byte of the memory block pointed to by str to the value c, up to a specified length n. It returns the pointer str after modifying the memory block.|
 | ft_bzero |  Sets the first n bytes of the memory pointed to by s to zero. It iterates through the memory block by decrementing n, and for each iteration, it assigns the value 0 to the current byte pointed to by s.|
 | ft_memcpy | Copies n bytes from the memory area pointed to by src to the memory area pointed to by dest. It returns a pointer to the destination memory area.|
 | ft_memmove | Copies n bytes from the memory area pointed to by src to the memory area pointed to by dest. It handles overlapping memory regions correctly by using a temporary buffer. It returns a pointer to the destination memory area.|
