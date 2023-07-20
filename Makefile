@@ -129,17 +129,13 @@ bonus: $(OBJS_CHECK) $(OBJS_LIST) $(OBJS_MEMORY) $(OBJS_PRINT) $(OBJS_STRING)
 	@echo "$(YELLOW)Created: $(words $(OBJS_CHECK) $(OBJS_LIST) $(OBJS_MEMORY) $(OBJS_PRINT) $(OBJS_STRING)) object file(s)$(RESET)"
 	@echo "$(YELLOW)Created: $(NAME)$(RESET)"
 
-so: $(OBJS_CHECK) $(OBJS_MEMORY) $(OBJS_PRINT) $(OBJS_STRING)
-	@${GCC} -shared -o libft.so $(OBJS_CHECK) $(OBJS_MEMORY) $(OBJS_PRINT) $(OBJS_STRING)
-	@echo "$(YELLOW)Created: libft.so$(RESET)"
-
 clean:
 	@$(RM) $(OBJS_CHECK) $(OBJS_LIST) $(OBJS_MEMORY) $(OBJS_PRINT) $(OBJS_STRING) error.txt
 	@echo "$(GREEN)$(BOLD)SUCCESS$(RESET)"
 	@echo "$(YELLOW)Removed: $(words $(OBJS_CHECK) $(OBJS_LIST) $(OBJS_MEMORY) $(OBJS_PRINT) $(OBJS_STRING)) object file(s)$(RESET)"
 
 fclean: clean
-	@$(RM) $(NAME) libft.so
+	@$(RM) $(NAME)
 	@echo "$(YELLOW)Removed: $(NAME)$(RESET)"
 
 re: fclean all
