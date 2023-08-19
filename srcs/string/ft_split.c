@@ -23,27 +23,24 @@
 ** Return:
 ** A dynamically allocated array of strings representing the split substrings.
 ** The last element of the array is set to NULL.
+** NULL if memory allocation fails or if 's' is NULL.
 **
 ** Description:
-** The ft_split function takes a pointer to a string (s) and a delimiter
-** character (c). It starts by counting the number of words in the string by
-** iterating through the characters and incrementing the word count every time
-** a word is encountered. Then, it dynamically allocates memory for an array of
-** strings (array) with a size equal to the word count plus one. Each element
-** of the array will store a split substring, and the last element is set to
-** NULL. Next, it splits the string into substrings by iterating through the
-** characters again. It skips leading delimiter characters until it finds the
-** start of a word. For each word, it calculates the length of the substring
-** and dynamically allocates memory to store it. It then copies the word from
-** the original string to the allocated memory using the copy_word function.
-** Finally, it increments the word count and repeats the process until all
-** words have been split and stored in the array. If any memory allocation
-** fails during the process, the function returns NULL to indicate an error.
-** The caller is responsible for freeing the allocated memory when it's no
-** longer needed to prevent memory leaks.
+** The ft_split function takes a pointer to the input string 's' and a
+** character 'c' which acts as a delimiter. It calculates the number of
+** substrings present in the string by calling the count_words function. It
+** then allocates memory for an array of string pointers to store the
+** substrings, including an extra NULL pointer at the end.
 **
-** Note: The function assumes that the input string is null-terminated and
-** does not contain any trailing delimiter characters.
+** The split function is responsible for populating the array with substrings.
+** It initializes two indices 'i' and 'j' to keep track of positions in the
+** string. It iterates through the string while 'i' is less than the number of
+** words. It skips the delimiter characters and extracts a substring using the
+** ft_substr function. If memory allocation for the substring fails, the
+** previously allocated memory is freed using the free_array function, and the
+** function returns NULL. Once all substrings are extracted and stored in the
+** array, a NULL pointer is placed at the end of the array to indicate the end
+** of substrings.
 **
 ** Example:
 ** const char *str = "Hello,World,Split,Me";
@@ -77,76 +74,85 @@
 ** "0", NULL])
 */
 
-static int	count_words(const char *s, char c)
-{
-	int	word_count;
+#include "libft.h"
 
-	word_count = 0;
-	while (*s)
+static size_t	count_words(char const *s, char c)
+{
+	size_t	count;
+	size_t	i;
+
+	count = 0;
+	i = 0;
+	while (*(s + i))
 	{
-		if (*s == c)
-			s++;
-		else
+		if (*(s + i) != c)
 		{
-			word_count++;
-			while (*s && *s != c)
-				s++;
+			count++;
+			while (*(s + i) && *(s + i) != c)
+				i++;
 		}
+		else if (*(s + i) == c)
+			i++;
 	}
-	return (word_count);
+	return (count);
 }
 
-static char	*copy_word(char *dest, const char *src, int n)
+static size_t	get_word_len(char const *s, char c)
 {
-	char		*dest_ptr;
-	const char	*src_ptr;
+	size_t	i;
 
-	dest_ptr = dest;
-	src_ptr = src;
-	while (n--)
-		*dest_ptr++ = *src_ptr++;
-	*dest_ptr = '\0';
-	return (dest);
+	i = 0;
+	while (*(s + i) && *(s + i) != c)
+		i++;
+	return (i);
 }
 
-static void	split_string(char **array, const char *s, char c, int count)
+static void	free_array(size_t i, char **array)
 {
-	int			word;
-	int			len;
-	const char	*word_start;
-
-	word = 0;
-	while (word < count)
+	while (i > 0)
 	{
-		while (*s && *s == c)
-			s++;
-		len = 0;
-		word_start = s;
-		while (*s && *s != c)
-		{
-			len++;
-			s++;
-		}
-		*(array + word) = (char *)malloc(sizeof(char) * (len + 1));
-		if (!*(array + word))
-			return ;
-		copy_word(*(array + word), word_start, len);
-		word++;
+		i--;
+		free(*(array + i));
 	}
-	*(array + word) = NULL;
+	free(array);
 }
 
-char	**ft_split(const char *s, char c)
+static char	**split(char const *s, char c, char **array, size_t words_count)
 {
-	int		count;
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	j = 0;
+	while (i < words_count)
+	{
+		while (*(s + j) && *(s + j) == c)
+			j++;
+		*(array + i) = ft_substr(s, j, get_word_len(&*(s + j), c));
+		if (!*(array + i))
+		{
+			free_array(i, array);
+			return (NULL);
+		}
+		while (*(s + j) && *(s + j) != c)
+			j++;
+		i++;
+	}
+	*(array + i) = NULL;
+	return (array);
+}
+
+char	**ft_split(char const *s, char c)
+{
 	char	**array;
+	size_t	words;
 
 	if (!s)
 		return (NULL);
-	count = count_words(s, c);
-	array = (char **)malloc(sizeof(char *) * (count + 1));
+	words = count_words(s, c);
+	array = (char **)malloc(sizeof(char *) * (words + 1));
 	if (!array)
 		return (NULL);
-	split_string(array, s, c, count);
+	array = split(s, c, array, words);
 	return (array);
 }
