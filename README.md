@@ -1,3 +1,5 @@
+![nshahid's 42 stats](https://badge42.vercel.app/api/v2/cllho6vgj001108l4to6gq7l8/stats?cursusId=21&coalitionId=undefined)
+
 # 42 ABU DHABI: LIBFT
 [Personal website which contains my current and past projects being undertaken at 42 Abu Dhabi.](https://42.nauman.cc/)<br />
 Get ready for some coding fun with Libft! It’s the first project you’ll tackle at 42, and it’s all about creating a supercharged library of awesome functions in good ol’ C. We’re talking about functions that give the standard ones a run for their money!<br/>
