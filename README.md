@@ -1,7 +1,5 @@
-![nshahid's 42 stats](https://badge42.vercel.app/api/v2/cllho6vgj001108l4to6gq7l8/stats?cursusId=21&coalitionId=undefined)
-
-# 42 ABU DHABI: LIBFT
-[Personal website which contains my current and past projects being undertaken at 42 Abu Dhabi.](https://42.nauman.cc/)<br />
+# 42: LIBFT
+[Personal website which contains my current and past projects being undertaken at 42.](https://42.nauman.cc/)<br />
 Get ready for some coding fun with Libft! It’s the first project you’ll tackle at 42, and it’s all about creating a supercharged library of awesome functions in good ol’ C. We’re talking about functions that give the standard ones a run for their money!<br/>
 <br/>
 To make things even more exciting, you’ll be using a Makefile to compile and run your library. Say goodbye to those ordinary standard functions because you won’t be needing them here. Libft is your new go-to resource for all your future 42 adventures.<br/>
